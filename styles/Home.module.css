@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  /* background-color: #003c05; */
 }
 
 .header {
@@ -14,6 +15,12 @@
   text-align: center;
 }
 
+/* Navbar */
+.navbar{
+  background-color: #032806;  
+  font-size: large;
+}
+/*  */
 .cloudform {
   position: relative;
 }
@@ -95,15 +102,15 @@
 }
 
 .usermessage {
-  background: #ffffff;
+  background: #032806;
   padding: 1.5rem;
-  color: #000;
+  color: #ffffff;
 }
 
 .usermessagewaiting {
   padding: 1.5rem;
-  color: #000;
-  background: linear-gradient(to left, #07080938, #1a1c2024, #07080936);
+  color: #ffffff;
+  background: linear-gradient(to left, #06520c, #07560d, #06520c);
   background-size: 200% 200%;
   background-position: -100% 0;
   animation: loading-gradient 2s ease-in-out infinite;
@@ -121,9 +128,9 @@
 }
 
 .apimessage {
-  background: #f9fafb;
+  background: #154519;
   padding: 1.5rem;
-  color: #000;
+  color: white;
   animation: fadein 0.5s;
 }
 
@@ -191,9 +198,9 @@
 .cloud {
   width: 75vw;
   height: 65vh;
-  background: #ffffff;
+  background: #032806;
   border-radius: 0.5rem;
-  border: 1px solid #d9d9e3;
+  /* border: 1px solid #d9d9e3; */
   display: flex;
   justify-content: center;
   align-items: center;

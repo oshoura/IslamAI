@@ -25,7 +25,7 @@ export default function Home() {
   }>({
     messages: [
       {
-        message: 'Hi, ask me any question on Islam.',
+        message: 'Salam, ask me any question on Islam.',
         type: 'apiMessage',
       },
     ],
@@ -123,12 +123,12 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <div className="mx-auto flex flex-col gap-4">
-          <h1 className="text-2xl font-bold leading-[1.1] tracking-tighter text-center">
+        <div className={`mx-auto flex flex-col gap-4 nav border-0`}>
+          <h1 className="text-2xl font-bold leading-[1.1] tracking-tighter text-center text-white">
             Ask Questions About Islam
           </h1>
           <main className={styles.main}>
-            <div className={styles.cloud}>
+            <div className={`${styles.cloud} `}>
               <div ref={messageListRef} className={styles.messagelist}>
                 {messages.map((message, index) => {
                   let icon;
