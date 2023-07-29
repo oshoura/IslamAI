@@ -1,43 +1,66 @@
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-import { PineconeStore } from 'langchain/vectorstores/pinecone';
-import { pinecone } from '@/utils/pinecone-client';
-import { CustomPDFLoader } from '@/utils/customPDFLoader';
-import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '@/config/pinecone';
-import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
+import * as dotenv from 'dotenv';
 
-/* Name of directory to retrieve your files from */
-const filePath = 'docs';
+dotenv.config({
+  'path':"../.env"
+});
+
+import axios from 'axios';
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
+import { Document } from 'langchain/document';
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
+import { pinecone } from '@/utils/pinecone-client';
+import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '@/config/pinecone';
+import { PineconeStore } from 'langchain/vectorstores/pinecone';
+
 
 export const run = async () => {
   try {
-    /*load raw docs from the all files in the directory */
-    const directoryLoader = new DirectoryLoader(filePath, {
-      '.pdf': (path) => new CustomPDFLoader(path),
-    });
+    
+    ///////////////////// Quran /////////////////////////////
 
-    // const loader = new PDFLoader(filePath);
-    const rawDocs = await directoryLoader.load();
+    // Load all suras
+    console.log("Reading the Quran...")
+    const directoryResponse = await axios.get('https://cdn.jsdelivr.net/npm/quran-json@3.1.2/dist/chapters/en/index.json');
+    const directory = directoryResponse.data;
+
+    const allSuras = await Promise.all(directory.map(async (x: { link: string }) => {
+        const suraResponse = await axios.get(x.link);
+        return suraResponse.data;
+    }));
+
+    // Break up into verses and load metadata
+    const allVerses: Document[] = []
+    allSuras.forEach(surah=>{
+      surah.verses.forEach(verse => {
+        allVerses.push(new Document({
+          "pageContent": verse.translation,
+          "metadata": {
+            'surah (chapter)': `${surah.transliteration} (${surah.translation})`,
+              'surah number': surah.id,
+              'verse number': verse.id,
+          }
+        }))
+      })
+    })
 
     /* Split text into chunks */
     const textSplitter = new RecursiveCharacterTextSplitter({
-      chunkSize: 1000,
+      chunkSize: 256,
       chunkOverlap: 200,
     });
 
-    const docs = await textSplitter.splitDocuments(rawDocs);
-    console.log('split docs', docs);
+    const docs = await textSplitter.splitDocuments(allVerses);
+    console.log('split docs', docs[0]);
 
-    console.log('creating vector store...');
     /*create and store the embeddings in the vectorStore*/
-    const embeddings = new OpenAIEmbeddings();
-    const index = pinecone.Index(PINECONE_INDEX_NAME); //change to your own index name
+    console.log('creating vector store...');
 
-    //embed the PDF documents
+    const embeddings = new OpenAIEmbeddings();
+    const index = pinecone.Index(PINECONE_INDEX_NAME); 
+    
     await PineconeStore.fromDocuments(docs, embeddings, {
       pineconeIndex: index,
       namespace: PINECONE_NAME_SPACE,
-      textKey: 'text',
     });
   } catch (error) {
     console.log('error', error);
