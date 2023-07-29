@@ -1,6 +1,6 @@
 import { OpenAI } from 'langchain/llms/openai';
 import { PineconeStore } from 'langchain/vectorstores/pinecone';
-import { LLMChain, loadQAChain, ChatVectorDBQAChain } from 'langchain/chains';
+import { LLMChain, loadQAChain, ConversationalRetrievalQAChain } from 'langchain/chains';
 import { PromptTemplate } from 'langchain/prompts';
 
 const CONDENSE_PROMPT =
@@ -35,11 +35,10 @@ export const makeChain = (vectorstore: PineconeStore) => {
     },
   );
 
-  return new ChatVectorDBQAChain({
-    vectorstore,
+  return new ConversationalRetrievalQAChain({
+    retriever: vectorstore.asRetriever(),
     combineDocumentsChain: docChain,
     questionGeneratorChain: questionGenerator,
     returnSourceDocuments: true,
-    k: 4, //number of source documents to return. Change this figure as required.
   });
 };
