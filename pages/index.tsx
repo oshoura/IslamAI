@@ -25,7 +25,7 @@ export default function Home() {
   }>({
     messages: [
       {
-        message: 'Hi, what would you like to learn about this document?',
+        message: 'Salam, ask me any question on Islam.',
         type: 'apiMessage',
       },
     ],
@@ -123,12 +123,12 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <div className="mx-auto flex flex-col gap-4">
-          <h1 className="text-2xl font-bold leading-[1.1] tracking-tighter text-center">
-            Chat With Your Docs
+        <div className={`mx-auto flex flex-col gap-4 nav border-0`}>
+          <h1 className="text-2xl font-bold leading-[1.1] tracking-tighter text-center text-white">
+            Ask Questions About Islam
           </h1>
           <main className={styles.main}>
-            <div className={styles.cloud}>
+            <div className={`${styles.cloud} `}>
               <div ref={messageListRef} className={styles.messagelist}>
                 {messages.map((message, index) => {
                   let icon;
@@ -137,7 +137,7 @@ export default function Home() {
                     icon = (
                       <Image
                         key={index}
-                        src="/bot-image.png"
+                        src="/islam-icon.png"
                         alt="AI"
                         width="40"
                         height="40"
@@ -176,7 +176,7 @@ export default function Home() {
                       </div>
                       {message.sourceDocs && (
                         <div
-                          className="p-5"
+                          className={`p-5 ${styles.sourcedocs}`}
                           key={`sourceDocsAccordion-${index}`}
                         >
                           <Accordion
@@ -188,15 +188,13 @@ export default function Home() {
                               <div key={`messageSourceDocs-${index}`}>
                                 <AccordionItem value={`item-${index}`}>
                                   <AccordionTrigger>
-                                    <h3>Source {index + 1}</h3>
+                                    <h3>{doc.metadata.source}</h3>
                                   </AccordionTrigger>
                                   <AccordionContent>
                                     <ReactMarkdown linkTarget="_blank">
                                       {doc.pageContent}
                                     </ReactMarkdown>
-                                    <p className="mt-2">
-                                      <b>Source:</b> {doc.metadata.source}
-                                    </p>
+
                                   </AccordionContent>
                                 </AccordionItem>
                               </div>
@@ -224,7 +222,7 @@ export default function Home() {
                     placeholder={
                       loading
                         ? 'Waiting for response...'
-                        : 'What is this legal case about?'
+                        : 'Where is patience discussed in the Quran?'
                     }
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
@@ -260,11 +258,11 @@ export default function Home() {
             )}
           </main>
         </div>
-        <footer className="m-auto p-4">
+        {/* <footer className="m-auto p-4">
           <a href="https://twitter.com/mayowaoshin">
             Powered by LangChainAI. Demo built by Mayo (Twitter: @mayowaoshin).
           </a>
-        </footer>
+        </footer> */}
       </Layout>
     </>
   );

@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  /* background-color: #003c05; */
 }
 
 .header {
@@ -14,6 +15,13 @@
   text-align: center;
 }
 
+/* Navbar */
+.navbar{
+  background-color: #032806;  
+  font-size: large;
+}
+
+/*  */
 .cloudform {
   position: relative;
 }
@@ -95,15 +103,15 @@
 }
 
 .usermessage {
-  background: #ffffff;
+  background: #032806;
   padding: 1.5rem;
-  color: #000;
+  color: #ffffff;
 }
 
 .usermessagewaiting {
   padding: 1.5rem;
-  color: #000;
-  background: linear-gradient(to left, #07080938, #1a1c2024, #07080936);
+  color: #ffffff;
+  background: linear-gradient(to left, #032806, #98c99c, #032806);
   background-size: 200% 200%;
   background-position: -100% 0;
   animation: loading-gradient 2s ease-in-out infinite;
@@ -121,10 +129,14 @@
 }
 
 .apimessage {
-  background: #f9fafb;
+  background: #154519;
   padding: 1.5rem;
-  color: #000;
+  color: white;
   animation: fadein 0.5s;
+}
+
+.sourcedocs{
+  background: #154519;
 }
 
 @keyframes fadein {
@@ -191,9 +203,9 @@
 .cloud {
   width: 75vw;
   height: 65vh;
-  background: #ffffff;
+  background: #032806;
   border-radius: 0.5rem;
-  border: 1px solid #d9d9e3;
+  /* border: 1px solid #d9d9e3; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -238,16 +250,6 @@
   }
   .textarea {
     width: 22rem;
-  }
-  .topnav {
-    border: 1px solid black;
-    align-items: center;
-    padding: 0.85rem 0.75rem 0.85rem 0.75rem;
-  }
-
-  .navlogo {
-    font-size: 1.25rem;
-    width: 20rem;
   }
 
   .markdownanswer code {

@@ -1,3 +1,5 @@
+import styles from '@/styles/Home.module.css';
+
 interface LayoutProps {
   children?: React.ReactNode;
 }
@@ -5,17 +7,18 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="mx-auto flex flex-col space-y-4">
-      <header className="container sticky top-0 z-40 bg-white">
-        <div className="h-16 border-b border-b-slate-200 py-4">
+      <header className=" sticky top-0 z-40 ">
+        <div className={`h-16 border-b-slate-200 py-4 ${styles.navbar}`}>
           <nav className="ml-4 pl-6">
-            <a href="#" className="hover:text-slate-600 cursor-pointer">
-              Home
-            </a>
+            <h1 className="text-white">
+              IslamGPT
+            </h1>
+            
           </nav>
         </div>
       </header>
       <div>
-        <main className="flex w-full flex-1 flex-col overflow-hidden">
+        <main className="flex w-full flex-1 flex-col overflow-hidden mt-30">
           {children}
         </main>
       </div>
