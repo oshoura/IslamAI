@@ -8,8 +8,6 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
-
 const isGithubActions = process.env.GITHUB_ACTIONS || false
 
 let assetPrefix = ''
@@ -30,3 +28,5 @@ module.exports = {
     path: 'the "domain" of your Imigix source',
   },
 }
+
+export default nextConfig;
