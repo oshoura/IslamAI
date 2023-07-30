@@ -30,11 +30,9 @@ export default async function handler(
 
     /* create vectorstore*/
     const vectorStore = await PineconeStore.fromExistingIndex(
-      new OpenAIEmbeddings({}),
+      new OpenAIEmbeddings(),
       {
         pineconeIndex: index,
-        textKey: 'text',
-        namespace: PINECONE_NAME_SPACE, //namespace comes from your config folder
       },
     );
 

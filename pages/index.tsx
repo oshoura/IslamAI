@@ -176,7 +176,7 @@ export default function Home() {
                       </div>
                       {message.sourceDocs && (
                         <div
-                          className="p-5"
+                          className={`p-5 ${styles.sourcedocs}`}
                           key={`sourceDocsAccordion-${index}`}
                         >
                           <Accordion
@@ -188,15 +188,13 @@ export default function Home() {
                               <div key={`messageSourceDocs-${index}`}>
                                 <AccordionItem value={`item-${index}`}>
                                   <AccordionTrigger>
-                                    <h3>Source {index + 1}</h3>
+                                    <h3>{doc.metadata.source}</h3>
                                   </AccordionTrigger>
                                   <AccordionContent>
                                     <ReactMarkdown linkTarget="_blank">
                                       {doc.pageContent}
                                     </ReactMarkdown>
-                                    <p className="mt-2">
-                                      <b>Source:</b> {doc.metadata.source}
-                                    </p>
+
                                   </AccordionContent>
                                 </AccordionItem>
                               </div>
