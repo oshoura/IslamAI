@@ -5,7 +5,6 @@ dotenv.config({
 });
 
 import axios from 'axios';
-import * as pdfjsLib from 'pdfjs-dist';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { Document } from 'langchain/document';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
