@@ -8,13 +8,18 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="mx-auto flex flex-col space-y-4">
       <header className=" sticky top-0 z-40 ">
-        <div className={`h-16 border-b-slate-200 py-4 ${styles.navbar}`}>
-          <nav className="ml-4 pl-6">
-            <h1 className="text-white">
-              IslamGPT
-            </h1>
-            
-          </nav>
+        <div className={styles.topnav}>
+          <div className={styles.navlogo}>
+            <a href="#">IslamGPT</a>
+          </div>
+          <div className={styles.navlinks}>
+            <a
+              href="https://github.com/oshoura/IslamGPT"
+              target="_blank"
+            >
+              GitHub
+            </a>
+          </div>
         </div>
       </header>
       <div>

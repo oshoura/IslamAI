@@ -21,6 +21,31 @@
   font-size: large;
 }
 
+.navlinks {
+  width: 20rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: right;
+}
+
+.topnav {
+  background-color: #141619;
+  border-bottom: 1px solid #30373d;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0.75rem 1rem 0.75rem;
+  align-items: center;
+}
+
+.navlogo, .navlinks a {
+  font-weight: 500;
+}
+
+.navlogo {
+  font-size: 1.25rem;
+  margin-left: 1rem;
+}
+
 /*  */
 .cloudform {
   position: relative;
@@ -242,6 +267,16 @@
   .main {
     padding: 1rem;
     max-height: 90vh;
+  }
+  .topnav {
+    border: 1px solid black;
+    align-items: center;
+    padding: 0.85rem 0.75rem 0.85rem 0.75rem;
+  }
+
+  .navlogo {
+    font-size: 1.25rem;
+    width: 20rem;
   }
 
   .cloud {
