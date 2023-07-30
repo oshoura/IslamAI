@@ -38,7 +38,7 @@ export const run = async () => {
     // Break up into verses and load metadata
     const allVerses: Document[] = []
     allSuras.forEach(surah=>{
-      surah.verses.forEach(verse => {
+      surah.verses.forEach((verse: { translation: string; id: any; }) => {
         allVerses.push(new Document({
           "pageContent": "Quran: " + verse.translation,
           "metadata": {
