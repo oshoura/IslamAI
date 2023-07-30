@@ -46,15 +46,15 @@
     "typescript": "^4.9.5"
   },
   "keywords": [
-    "starter",
+    "Islam",
+    "Quran",
+    "Hadith",
     "gpt4",
     "pinecone",
     "typescript",
     "nextjs",
     "langchain",
-    "law",
-    "legal",
-    "pdf",
-    "openai"
+    "openai",
+    "chatbot"
   ]
 }
