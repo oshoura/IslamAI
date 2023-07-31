@@ -4,9 +4,9 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="mx-auto flex flex-col bg-gray-100 dark:bg-gray-800 min-h-screen">
+    <div className="mx-auto flex flex-col bg-gray-100 dark:bg-gray-800 h-screen md:h-full md:min-h-screen overflow-y-scroll md:overflow-visible">
       <header className="sticky top-0 z-40 ">
-        <div className="w-full flex justify-between items-center space-x-8 py-5 px-8 bg-white dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-medium">
+        <div className="w-full flex flex-col md:flex-row space-y-4 md:space-y-0 justify-between items-start md:items-center md:space-x-8 py-5 px-8 bg-white dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-medium">
           <h1 className="font-bold text-lg">IslamGPT: Ask Questions About Islam</h1>
 
           <a href="https://github.com/oshoura/IslamGPT"
@@ -22,9 +22,9 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </header>
 
-        <main className="flex-1 w-full h-full">
-          {children}
-        </main>
+      <main className="flex-1 w-full h-full">
+        {children}
+      </main>
     </div>
   );
 }

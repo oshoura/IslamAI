@@ -2,10 +2,10 @@ import { useRef, useState, useEffect } from 'react';
 import Layout from '@/components/layout';
 import styles from '@/styles/Home.module.css';
 import { Message } from '@/types/chat';
-import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import LoadingDots from '@/components/ui/LoadingDots';
 import { Document } from 'langchain/document';
+import { Spinner } from '@/components/ui/Spinner';
 import {
   Accordion,
   AccordionContent,
@@ -32,7 +32,7 @@ export default function Home() {
     history: [],
   });
 
-  const { messages, history } = messageState;
+  const { messages, history, pending: updatingMessageState } = messageState;
 
   const messageListRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -120,44 +120,59 @@ export default function Home() {
     }
   };
 
+  const clearHistory = () => {
+    setMessageState({
+      messages: [
+        {
+          message: 'Salam, ask me any question on Islam.',
+          type: 'apiMessage',
+        },
+      ],
+      history: [],
+    })
+  }
+
   return (
     <>
       <Layout>
         <div className="mx-auto flex flex-col gap-4 nav border-0">
           <main className={styles.main}>
-            <div className="w-full">
-              <div ref={messageListRef} className="w-full h-full divide-y divide-gray-300 dark:divide-gray-700">
+            <div className="w-full pb-32">
+              <div ref={messageListRef} className="w-full h-full divide-y divide-gray-200 dark:divide-gray-700">
                 {messages.map((message, index) => {
                   let icon;
                   let className;
                   const baseStyles = "w-full px-6 py-4 animate text-gray-600 dark:text-gray-300";
+                  const waiting = loading && index === messages.length - 1;
                   if (message.type === 'apiMessage') {
                     icon = (
-                        <svg className="w-5 aspect-square" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                          <path clipRule="evenodd" fillRule="evenodd" d="M7.455 2.004a.75.75 0 01.26.77 7 7 0 009.958 7.967.75.75 0 011.067.853A8.5 8.5 0 116.647 1.921a.75.75 0 01.808.083z"></path>
-                        </svg>
+                        <div className="bg-green-600 p-1.5 rounded-sm text-white">
+                          <svg className="w-5 aspect-square" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path clipRule="evenodd" fillRule="evenodd" d="M7.455 2.004a.75.75 0 01.26.77 7 7 0 009.958 7.967.75.75 0 011.067.853A8.5 8.5 0 116.647 1.921a.75.75 0 01.808.083z"></path>
+                          </svg>
+                        </div>
                     );
                     className = styles.apimessage;
                     className = baseStyles;
                   } else {
                     icon = (
-                        <svg className="w-5 aspect-square" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                          <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"></path>
-                        </svg>
+                        <div className="bg-purple-600 p-1.5 rounded-sm text-white">
+                          <svg className="w-5 aspect-square" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"></path>
+                          </svg>
+                        </div>
                     );
-                    // The latest message sent by the user will be animated while waiting for a response
                     className = baseStyles + ' bg-white dark:bg-gray-700';
-                      // loading && index === messages.length - 1
-                      //   ? baseStyles
-                      //   : baseStyles + ' bg-white dark:bg-gray-700';
                   }
                   return (
                     <>
                       <div key={`chatMessage-${index}`} className={className}>
-                        <div className='flex gap-4 text-left items-center max-w-4xl mx-auto'>
-                          <div className="bg-green-600 p-1.5 rounded-sm text-white">
-                            {icon}
-                          </div>
+                        <div className='flex gap-4 text-left items-start max-w-4xl mx-auto'>
+                          {waiting ?
+                              <div className="bg-gray-300 dark:bg-gray-500 p-1.5 rounded-sm flex items-center justify-center">
+                                <Spinner />
+                              </div> : icon}
+
                           <div className={styles.markdownanswer}>
                             <ReactMarkdown linkTarget="_blank">
                               {message.message}
@@ -167,7 +182,7 @@ export default function Home() {
                       </div>
                       {message.sourceDocs && (
                         <div
-                          className={`p-5 ${styles.sourcedocs}`}
+                          className="text-gray-500 dark:text-gray-400 max-w-4xl mx-auto"
                           key={`sourceDocsAccordion-${index}`}
                         >
                           <Accordion
@@ -198,7 +213,13 @@ export default function Home() {
                 })}
               </div>
             </div>
-            <div className="absolute bottom-5">
+            <div className="fixed bottom-5 flex flex-col items-center">
+              <button className="py-2 px-3 text-sm rounded-md border border-gray-400 dark:border-gray-500 mb-4 text-gray-900 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 hover:dark:bg-gray-600 hover:bg-gray-200"
+                      onClick={clearHistory}>
+                { updatingMessageState && <Spinner /> }
+                Clear history
+              </button>
+
               <div className="relative">
                 <form onSubmit={handleSubmit}>
                   <input
@@ -216,7 +237,7 @@ export default function Home() {
                     }
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    className="w-[60vw] shadow-xl mx-auto py-4 px-6 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg outline-0 resize-none"
+                    className="w-[90vw] md:w-[60vw] shadow-xl mx-auto py-4 px-6 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg outline-0 resize-none"
                   />
                   <button
                     type="submit"
@@ -242,7 +263,7 @@ export default function Home() {
               </div>
             </div>
             {error && (
-              <div className="w-full px-6 py-4 animate text-gray-600 dark:text-gray-300 bg-red-50 dark:bg-red-900 border-y border-red-700">
+              <div className="w-full px-6 py-4 animate text-gray-600 dark:text-gray-300 bg-red-50 dark:bg-red-900 border-y border-red-400 dark:border-red-700">
                 <p className="max-w-4xl mx-auto text-red-600 dark:text-white">{error}</p>
               </div>
             )}

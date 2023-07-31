@@ -80,10 +80,6 @@
   }
 }
 
-.sourcedocs{
-  background: #154519;
-}
-
 @keyframes fadein {
   from {
     opacity: 0;
