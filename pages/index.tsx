@@ -35,10 +35,10 @@ export default function Home() {
   const { messages, history } = messageState;
 
   const messageListRef = useRef<HTMLDivElement>(null);
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    textAreaRef.current?.focus();
+    inputRef.current?.focus();
   }, []);
 
   //handle form submission
@@ -123,55 +123,46 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <div className={`mx-auto flex flex-col gap-4 nav border-0`}>
-          <h1 className="text-2xl font-bold leading-[1.1] tracking-tighter text-center text-white">
-            Ask Questions About Islam
-          </h1>
+        <div className="mx-auto flex flex-col gap-4 nav border-0">
           <main className={styles.main}>
-            <div className={`${styles.cloud} `}>
-              <div ref={messageListRef} className={styles.messagelist}>
+            <div className="w-full">
+              <div ref={messageListRef} className="w-full h-full divide-y divide-gray-300 dark:divide-gray-700">
                 {messages.map((message, index) => {
                   let icon;
                   let className;
+                  const baseStyles = "w-full px-6 py-4 animate text-gray-600 dark:text-gray-300";
                   if (message.type === 'apiMessage') {
                     icon = (
-                      <Image
-                        key={index}
-                        src="/islam-icon.png"
-                        alt="AI"
-                        width="40"
-                        height="40"
-                        className={styles.boticon}
-                        priority
-                      />
+                        <svg className="w-5 aspect-square" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <path clipRule="evenodd" fillRule="evenodd" d="M7.455 2.004a.75.75 0 01.26.77 7 7 0 009.958 7.967.75.75 0 011.067.853A8.5 8.5 0 116.647 1.921a.75.75 0 01.808.083z"></path>
+                        </svg>
                     );
                     className = styles.apimessage;
+                    className = baseStyles;
                   } else {
                     icon = (
-                      <Image
-                        key={index}
-                        src="/usericon.png"
-                        alt="Me"
-                        width="30"
-                        height="30"
-                        className={styles.usericon}
-                        priority
-                      />
+                        <svg className="w-5 aspect-square" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"></path>
+                        </svg>
                     );
                     // The latest message sent by the user will be animated while waiting for a response
-                    className =
-                      loading && index === messages.length - 1
-                        ? styles.usermessagewaiting
-                        : styles.usermessage;
+                    className = baseStyles + ' bg-white dark:bg-gray-700';
+                      // loading && index === messages.length - 1
+                      //   ? baseStyles
+                      //   : baseStyles + ' bg-white dark:bg-gray-700';
                   }
                   return (
                     <>
                       <div key={`chatMessage-${index}`} className={className}>
-                        {icon}
-                        <div className={styles.markdownanswer}>
-                          <ReactMarkdown linkTarget="_blank">
-                            {message.message}
-                          </ReactMarkdown>
+                        <div className='flex gap-4 text-left items-center max-w-4xl mx-auto'>
+                          <div className="bg-green-600 p-1.5 rounded-sm text-white">
+                            {icon}
+                          </div>
+                          <div className={styles.markdownanswer}>
+                            <ReactMarkdown linkTarget="_blank">
+                              {message.message}
+                            </ReactMarkdown>
+                          </div>
                         </div>
                       </div>
                       {message.sourceDocs && (
@@ -207,15 +198,14 @@ export default function Home() {
                 })}
               </div>
             </div>
-            <div className={styles.center}>
-              <div className={styles.cloudform}>
+            <div className="absolute bottom-5">
+              <div className="relative">
                 <form onSubmit={handleSubmit}>
-                  <textarea
+                  <input
                     disabled={loading}
                     onKeyDown={handleEnter}
-                    ref={textAreaRef}
+                    ref={inputRef}
                     autoFocus={false}
-                    rows={1}
                     maxLength={512}
                     id="userInput"
                     name="userInput"
@@ -226,7 +216,7 @@ export default function Home() {
                     }
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    className={styles.textarea}
+                    className="w-[60vw] shadow-xl mx-auto py-4 px-6 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg outline-0 resize-none"
                   />
                   <button
                     type="submit"
@@ -252,8 +242,8 @@ export default function Home() {
               </div>
             </div>
             {error && (
-              <div className="border border-red-400 rounded-md p-4">
-                <p className="text-red-500">{error}</p>
+              <div className="w-full px-6 py-4 animate text-gray-600 dark:text-gray-300 bg-red-50 dark:bg-red-900 border-y border-red-700">
+                <p className="max-w-4xl mx-auto text-red-600 dark:text-white">{error}</p>
               </div>
             )}
           </main>

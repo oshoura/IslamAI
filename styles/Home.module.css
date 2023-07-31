@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  /*padding: 1rem;*/
   /* background-color: #003c05; */
 }
 
@@ -13,55 +13,6 @@
 
 .header p {
   text-align: center;
-}
-
-/* Navbar */
-.navbar{
-  background-color: #032806;  
-  font-size: large;
-}
-
-.navlinks {
-  width: 20rem;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: right;
-}
-
-.topnav {
-  background-color: #141619;
-  border-bottom: 1px solid #30373d;
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 0.75rem 1rem 0.75rem;
-  align-items: center;
-}
-
-.navlogo, .navlinks a {
-  font-weight: 500;
-}
-
-.navlogo {
-  font-size: 1.25rem;
-  margin-left: 1rem;
-}
-
-/*  */
-.cloudform {
-  position: relative;
-}
-
-.textarea {
-  position: relative;
-  resize: none;
-  font-size: 1.1rem;
-  padding: 1rem 2rem 1rem 2rem;
-  width: 75vw;
-  border-radius: 0.5rem;
-  border: 1px solid #d9d9e3;
-  background: #ffffff;
-  color: #000;
-  outline: none;
 }
 
 .textarea:disabled {
@@ -103,7 +54,7 @@
 }
 
 .generatebutton:hover {
-  background: #e4575726;
+  background: #f3f4f6;
   border-radius: 0.2rem;
 }
 
@@ -113,35 +64,11 @@
   background: none;
 }
 
-.messagelist {
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-  border-radius: 0.5rem;
-}
-
 .messagelistloading {
   display: flex;
   width: 100%;
   justify-content: center;
   margin-top: 1rem;
-}
-
-.usermessage {
-  background: #032806;
-  padding: 1.5rem;
-  color: #ffffff;
-}
-
-.usermessagewaiting {
-  padding: 1.5rem;
-  color: #ffffff;
-  background: linear-gradient(to left, #032806, #98c99c, #032806);
-  background-size: 200% 200%;
-  background-position: -100% 0;
-  animation: loading-gradient 2s ease-in-out infinite;
-  animation-direction: alternate;
-  animation-name: loading-gradient;
 }
 
 @keyframes loading-gradient {
@@ -151,13 +78,6 @@
   100% {
     background-position: 100% 0;
   }
-}
-
-.apimessage {
-  background: #154519;
-  padding: 1.5rem;
-  color: white;
-  animation: fadein 0.5s;
 }
 
 .sourcedocs{
@@ -171,12 +91,6 @@
   to {
     opacity: 1;
   }
-}
-
-.apimessage,
-.usermessage,
-.usermessagewaiting {
-  display: flex;
 }
 
 .markdownanswer {
@@ -214,15 +128,6 @@
 .markdownanswer h2,
 .markdownanswer h3 {
   font-size: inherit;
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding: 1rem 0;
-  flex-direction: column;
 }
 
 .cloud {
