@@ -1,6 +1,6 @@
 # IslamGPT
 
-A Chatbot grounded in Islami sources.
+A Chatbot grounded in Islamic sources.
 
 Can answer questions about the Quran, Hadiths, or Seerah of the Prophet SAW
 
