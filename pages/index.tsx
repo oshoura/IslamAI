@@ -34,7 +34,7 @@ export default function Home() {
 
   const { messages, history, pending: updatingMessageState } = messageState;
 
-  const messageListRef = useRef<HTMLDivElement>(null);
+  const lastMessageRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -101,9 +101,6 @@ export default function Home() {
       console.log('messageState', messageState);
 
       setLoading(false);
-
-      //scroll to bottom
-      messageListRef.current?.scrollTo(0, messageListRef.current.scrollHeight);
     } catch (error) {
       setLoading(false);
       setError('An error occurred while fetching the data. Please try again.');
@@ -132,18 +129,26 @@ export default function Home() {
     })
   }
 
+  useEffect(() => {
+    //scroll to bottom
+    lastMessageRef.current?.scrollIntoView(true);
+  }, [messageState])
+
   return (
     <>
       <Layout>
         <div className="mx-auto flex flex-col gap-4 nav border-0">
           <main className={styles.main}>
-            <div className="w-full pb-32">
-              <div ref={messageListRef} className="w-full h-full divide-y divide-gray-200 dark:divide-gray-700">
+            <div className="w-full pb-36">
+              <div className="w-full h-full divide-y divide-gray-200 dark:divide-gray-700">
                 {messages.map((message, index) => {
                   let icon;
                   let className;
+
                   const baseStyles = "w-full px-6 py-4 animate text-gray-600 dark:text-gray-300";
-                  const waiting = loading && index === messages.length - 1;
+                  const isLastMessage = index === messages.length - 1;
+                  const waiting = loading && isLastMessage;
+
                   if (message.type === 'apiMessage') {
                     icon = (
                         <div className="bg-green-600 p-1.5 rounded-sm text-white">
@@ -165,7 +170,7 @@ export default function Home() {
                     className = baseStyles + ' bg-white dark:bg-gray-700';
                   }
                   return (
-                    <>
+                    <div ref={isLastMessage ? lastMessageRef : null}>
                       <div key={`chatMessage-${index}`} className={className}>
                         <div className='flex gap-4 text-left items-start max-w-4xl mx-auto'>
                           {waiting ?
@@ -182,7 +187,7 @@ export default function Home() {
                       </div>
                       {message.sourceDocs && (
                         <div
-                          className="text-gray-500 dark:text-gray-400 max-w-4xl mx-auto"
+                          className="text-gray-500 dark:text-gray-400 px-4 max-w-4xl mx-auto"
                           key={`sourceDocsAccordion-${index}`}
                         >
                           <Accordion
@@ -194,7 +199,7 @@ export default function Home() {
                               <div key={`messageSourceDocs-${index}`}>
                                 <AccordionItem value={`item-${index}`}>
                                   <AccordionTrigger>
-                                    <h3>{doc.metadata.source}</h3>
+                                    <h3 className="text-left">{doc.metadata.source}</h3>
                                   </AccordionTrigger>
                                   <AccordionContent>
                                     <ReactMarkdown linkTarget="_blank">
@@ -208,7 +213,7 @@ export default function Home() {
                           </Accordion>
                         </div>
                       )}
-                    </>
+                    </div>
                   );
                 })}
               </div>
@@ -237,7 +242,7 @@ export default function Home() {
                     }
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    className="w-[90vw] md:w-[60vw] shadow-xl mx-auto py-4 px-6 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg outline-0 resize-none"
+                    className="w-[90vw] md:w-[60vw] shadow-xl mx-auto py-4 px-6 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white rounded-lg outline-0 resize-none"
                   />
                   <button
                     type="submit"

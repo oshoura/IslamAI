@@ -166,7 +166,7 @@
 /* Mobile optimization */
 @media (max-width: 600px) {
   .main {
-    padding: 1rem;
+    /*padding: 1rem;*/
     max-height: 90vh;
   }
   .topnav {
