@@ -5,7 +5,11 @@ import { Message } from '@/types/chat';
 import ReactMarkdown from 'react-markdown';
 import LoadingDots from '@/components/ui/LoadingDots';
 import { Document } from 'langchain/document';
+import ReactModal from 'react-modal';
 import { Spinner } from '@/components/ui/Spinner';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+
 import {
   Accordion,
   AccordionContent,
@@ -17,6 +21,7 @@ export default function Home() {
   const [query, setQuery] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState<boolean>(true);
   const [messageState, setMessageState] = useState<{
     messages: Message[];
     pending?: string;
@@ -134,9 +139,62 @@ export default function Home() {
     lastMessageRef.current?.scrollIntoView(true);
   }, [messageState])
 
+  const modalStyle = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '70%',
+    bgcolor: 'background.black',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  }
+
+
   return (
     <>
       <Layout>
+      <Modal
+        open={modalOpen}
+        onClose={closeModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={modalStyle}>
+          <div className=' px-6 py-4'>
+
+          <h1 className='text-2xl font-semibold text-white-900'>
+            Welcome to IslamGPT
+          </h1>
+          <p className='mt-2 text-lg text-gray-400 pt-3'> 
+            IslamGPT is a gpt powered chatbot that refers to Islamic sources to answer your questions.
+            <br />
+            <br />
+            Please note, that this chatbot should not be used for fatwa purposes. It is only a reference tool.
+            It's strengths are retrieving the approproate sources to answer your questions. Please always
+            double check it's answer, by reviewing the sources it provides.
+            <br />
+            <br />
+            Thank you, and I hope you benefit from using this tool.
+          </p>
+
+          <div className="sm:px-6 sm:flex sm:flex-row-reverse">
+          <button type="button" 
+          onClick={closeModal}
+          className="py-2 px-3 text-sm rounded-md border border-gray-400 dark:border-gray-500 mb-4 text-gray-900 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 hover:dark:bg-gray-600 hover:bg-gray-200">
+            
+            OK
+          </button>
+        </div>
+          </div>
+        </Box>
+        
+      </Modal>
         <div className="mx-auto flex flex-col gap-4 nav border-0">
           <main className={styles.main}>
             <div className="w-full pb-36">
@@ -170,6 +228,7 @@ export default function Home() {
                     className = baseStyles + ' bg-white dark:bg-gray-700';
                   }
                   return (
+                    // eslint-disable-next-line react/jsx-key
                     <div ref={isLastMessage ? lastMessageRef : null}>
                       <div key={`chatMessage-${index}`} className={className}>
                         <div className='flex gap-4 text-left items-start max-w-4xl mx-auto'>
@@ -177,7 +236,6 @@ export default function Home() {
                               <div className="bg-gray-300 dark:bg-gray-500 p-1.5 rounded-sm flex items-center justify-center">
                                 <Spinner />
                               </div> : icon}
-
                           <div className={styles.markdownanswer}>
                             <ReactMarkdown linkTarget="_blank">
                               {message.message}
