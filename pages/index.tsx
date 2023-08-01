@@ -229,7 +229,6 @@ export default function Home() {
                     className = baseStyles + ' bg-white dark:bg-gray-700';
                   }
                   return (
-                    // eslint-disable-next-line react/jsx-key
                     <div ref={isLastMessage ? lastMessageRef : null}>
                       <div key={`chatMessage-${index}`} className={className}>
                         <div className='flex gap-4 text-left items-start max-w-4xl mx-auto'>
