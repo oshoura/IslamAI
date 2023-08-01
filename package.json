@@ -15,7 +15,10 @@
     "ingest": "tsx -r dotenv/config scripts/ingest-data.ts"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@microsoft/fetch-event-source": "^2.0.1",
+    "@mui/material": "^5.14.2",
     "@pinecone-database/pinecone": "0.1.6",
     "@radix-ui/react-accordion": "^1.1.1",
     "axios": "^1.4.0",
@@ -34,6 +37,7 @@
     "@types/pdf-parse": "^1.1.1",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@types/react-modal": "^3.16.0",
     "@typescript-eslint/parser": "^5.54.0",
     "autoprefixer": "^10.4.13",
     "dotenv": "^16.3.1",
