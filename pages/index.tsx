@@ -5,10 +5,9 @@ import { Message } from '@/types/chat';
 import ReactMarkdown from 'react-markdown';
 import LoadingDots from '@/components/ui/LoadingDots';
 import { Document } from 'langchain/document';
-import ReactModal from 'react-modal';
 import { Spinner } from '@/components/ui/Spinner';
 import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
+import Head from 'next/head';
 
 import {
   Accordion,
@@ -158,6 +157,9 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+          <title>IslamAI</title>
+      </Head>
       <Layout>
       <Modal
         open={modalOpen}
@@ -177,8 +179,8 @@ export default function Home() {
             <br />
             <br />
             Please note, that this chatbot should not be used for fatwa purposes. It is only a reference tool.
-            It's strengths are retrieving the approproate sources to answer your questions. Please always
-            double check it's answer, by reviewing the sources it provides.
+            It&apos;s strengths are retrieving the approproate sources to answer your questions. Please always
+            double check it&apos;s answer, by reviewing the sources it provides.
             <br />
             <br />
             Thank you, and I hope you benefit from using this tool.
