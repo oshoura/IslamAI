@@ -179,7 +179,7 @@ export default function Home() {
             <br />
             <br />
             Please note, that this chatbot should not be used for fatwa purposes. It is only a reference tool.
-            It&apos;s strengths are retrieving the approproate sources to answer your questions. Please always
+            It&apos;s strengths are retrieving the appropriate sources to answer your questions. Please, always
             double check it&apos;s answer, by reviewing the sources it provides.
             <br />
             <br />
