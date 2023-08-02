@@ -1,6 +1,7 @@
 {
   "extends": "next/core-web-vitals",
   "rules": {
-    "react/jsx-key": "off"
+    "react/jsx-key": "off",
+    "@next/next/no-title-in-document-head": "off"
   }
 }
