@@ -157,9 +157,9 @@ export default function Home() {
 
   return (
     <>
-      <Head>
+      {/* <Head>
           <title>IslamAI</title>
-      </Head>
+      </Head> */}
       <Layout>
       <Modal
         open={modalOpen}
