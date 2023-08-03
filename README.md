@@ -20,4 +20,6 @@ The project is built using Next.js and deployed using Vercel.com
 
 Frontend of this repo is inspired by [langchain-chat-nextjs](https://github.com/zahidkhawaja/langchain-chat-nextjs)
 
+Big help with the front end from [Aman Ali](https://github.com/Amaan630)
+
 Skeleton forked from https://www.youtube.com/watch?v=ih9PBGVVOO4
