@@ -171,10 +171,10 @@ export default function Home() {
          focus:outline-none bg-gray-100 dark:bg-gray-800 shadow-2xl p-4 rounded-lg'>
           <div className=' px-6 py-4 '>
 
-          <h1 className='text-2xl font-semibold text-black dark:text-white'>
+          <h1 className='text-lg md:text-2xl font-semibold text-black dark:text-white'>
             Welcome to IslamAI
           </h1>
-          <p className='mt-2 text-lg text-gray-700 dark:text-gray-400 pt-3'> 
+          <p className='mt-2 text-sm md:text-lg text-gray-700 dark:text-gray-400 pt-3'> 
             IslamAI is a GPT powered chatbot that refers to Islamic sources to answer your questions.
             <br />
             <br />
