@@ -2,6 +2,7 @@ import '@/styles/base.css';
 import type { AppProps } from 'next/app';
 import { Poppins } from 'next/font/google';
 import Hotjar from '@hotjar/browser';
+import { Analytics } from '@vercel/analytics/react';
 
 const siteId = 3600422;
 const hotjarVersion = 6;
@@ -21,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <main className={font.className}>
         <Component {...pageProps} />
+        <Analytics />
       </main>
     </>
   );
