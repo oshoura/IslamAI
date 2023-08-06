@@ -157,9 +157,6 @@ export default function Home() {
 
   return (
     <>
-      {/* <Head>
-          <title>IslamAI</title>
-      </Head> */}
       <Layout>
       <Modal
         open={modalOpen}
@@ -172,10 +169,10 @@ export default function Home() {
           <div className=' px-6 py-4 '>
 
           <h1 className='text-lg md:text-2xl font-semibold text-black dark:text-white'>
-            Welcome to IslamAI
+            Welcome to Islamicly
           </h1>
           <p className='mt-2 text-sm md:text-lg text-gray-700 dark:text-gray-400 pt-3'> 
-            IslamAI is a GPT powered chatbot that refers to Islamic sources to answer your questions.
+            Islamicly is a GPT powered chatbot that refers to Islamic sources to answer your questions.
             <br />
             <br />
             Please note, that this chatbot should not be used for fatwa purposes. It is only a reference tool.

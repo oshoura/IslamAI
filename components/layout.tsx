@@ -7,7 +7,7 @@ export default function Layout({ children }: LayoutProps) {
     <div className="mx-auto flex flex-col bg-gray-100 dark:bg-gray-800 h-screen md:h-full md:min-h-screen overflow-y-scroll md:overflow-visible">
       <header className="sticky top-0 z-40 ">
         <div className="w-full flex flex-col md:flex-row space-y-4 md:space-y-0 justify-between items-start md:items-center md:space-x-8 py-5 px-8 bg-white dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-medium">
-          <h1 className="font-bold text-lg">IslamAI: Ask Questions About Islam</h1>
+          <h1 className="font-bold text-lg">Islamicly: Ask Questions About Islam</h1>
 
           <a href="https://github.com/oshoura/IslamGPT"
              className="text-gray-500 dark:text-gray-400 flex gap-2 items-center"
