@@ -9,8 +9,14 @@ export default function Layout({ children }: LayoutProps) {
         <div className="w-full flex flex-col md:flex-row space-y-4 md:space-y-0 justify-between items-start md:items-center md:space-x-8 py-5 px-8 bg-white dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-medium">
           <h1 className="font-bold text-lg">Islamicly: Ask Questions About Islam</h1>
 
+        <div className="flex flex-grow justify-end space-x-8">
+          <a href="https://forms.gle/gWPBGjrCKCAgNzmF6"
+             className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 flex gap-2 items-center"
+             target="_blank">
+            <span className="">Give Feedback</span>
+          </a>
           <a href="https://github.com/oshoura/IslamGPT"
-             className="text-gray-500 dark:text-gray-400 flex gap-2 items-center"
+             className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 flex gap-2 items-center"
              target="_blank">
             <svg aria-hidden="true" className="mb-0.5 dark:invert" height="20" version="1.1"
                  viewBox="0 0 16 16" width="20">
@@ -19,6 +25,8 @@ export default function Layout({ children }: LayoutProps) {
             </svg>
             <span className="hidden sm:block">GitHub</span>
           </a>
+
+        </div>
         </div>
       </header>
 

@@ -4,10 +4,9 @@ import styles from '@/styles/Home.module.css';
 import { Message } from '@/types/chat';
 import ReactMarkdown from 'react-markdown';
 import LoadingDots from '@/components/ui/LoadingDots';
+import WelcomeModal from '@/components/ui/welcomeModal';
 import { Document } from 'langchain/document';
 import { Spinner } from '@/components/ui/Spinner';
-import Modal from '@mui/material/Modal';
-import Head from 'next/head';
 
 import {
   Accordion,
@@ -138,63 +137,10 @@ export default function Home() {
     lastMessageRef.current?.scrollIntoView(true);
   }, [messageState])
 
-  const modalStyle = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '70%',
-    bgcolor: 'background.black',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  }
-
-
   return (
     <>
+      <WelcomeModal open={modalOpen} onClose={() => setModalOpen(false)} />
       <Layout>
-      <Modal
-        open={modalOpen}
-        onClose={closeModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70vw]
-         focus:outline-none bg-gray-100 dark:bg-gray-800 shadow-2xl p-4 rounded-lg'>
-          <div className=' px-6 py-4 '>
-
-          <h1 className='text-lg md:text-2xl font-semibold text-black dark:text-white'>
-            Welcome to Islamicly
-          </h1>
-          <p className='mt-2 text-sm md:text-lg text-gray-700 dark:text-gray-400 pt-3'> 
-            Islamicly is a GPT powered chatbot that refers to Islamic sources to answer your questions.
-            <br />
-            <br />
-            Please note, that this chatbot should not be used for fatwa purposes. It is only a reference tool.
-            It&apos;s strengths are retrieving the appropriate sources to answer your questions. Please, always
-            double check it&apos;s answer, by reviewing the sources it provides.
-            <br />
-            <br />
-            Thank you, and I hope you benefit from using this tool.
-          </p>
-
-          <div className="pt-2 sm:px-6 sm:flex flex flex-col justify-between">
-          <button type="button" 
-          onClick={closeModal}
-          className="py-2 px-3 text-sm rounded-md border border-gray-400 dark:border-gray-500 mb-4 text-gray-900 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 hover:dark:bg-gray-600 hover:bg-gray-200 self-end">
-            
-            OK
-          </button>
-        </div>
-          </div>
-        </div>
-        
-      </Modal>
         <div className="mx-auto flex flex-col gap-4 nav border-0">
           <main className={styles.main}>
             <div className="w-full pb-36">
