@@ -1,6 +1,6 @@
 import Modal from '@mui/material/Modal';
 
-const WelcomeModal = (props) => {
+const WelcomeModal = (props: { open: any; onClose: any; }) => {
 
     const {open, onClose} = props;
 
