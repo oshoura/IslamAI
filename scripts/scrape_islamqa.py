@@ -49,10 +49,10 @@ def parse_qa(html,url):
 
 async def run():
     islam_qa = []
-    last_num = 20000
+    last_num = 114050
     max_num = 473749
     part = 4
-    for i in range(20000, max_num+1):
+    for i in range(114050, max_num+1):
         if i % 100 == 0 or i == max_num:
             print("Sent requests from", last_num, "to", i)
             urls = [f'https://islamqa.info/en/answers/{i}' for i in range(last_num, i)]
