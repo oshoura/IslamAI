@@ -12,7 +12,7 @@ async def fetch(session, url):
             if response.status == 200:
                 resp = await response.text(), url
             else:
-                print(f"Error {response.status} for URL: {url}")
+                # print(f"Error {response.status} for URL: {url}")
                 resp = None, None
     except aiohttp.ClientError as e:
         print(f"Client error {e} for URL: {url}")
@@ -67,10 +67,10 @@ def parse_qa(html,url):
 
 async def run():
     islam_qa = []
-    last_num = 114050
-    max_num = 473749
-    part = 4
-    for i in range(114050, max_num+1):
+    last_num = 224475
+    max_num = 500749
+    part = 9
+    for i in range(224475, max_num+1):
         if i % 100 == 0 or i == max_num:
             print("Sent requests from", last_num, "to", i)
             urls = [f'https://islamqa.info/en/answers/{i}' for i in range(last_num, i)]
@@ -78,7 +78,7 @@ async def run():
             responses = await run_async_tasks(urls)
             print(f"Got {len(responses)} responses from batch and {len(islam_qa)} responses in total")
             islam_qa.extend(responses)
-        if len(islam_qa) >= 3000:
+        if len(islam_qa) >= 200:
             with open(f"./islam_qa_part{part}.json", 'w') as file:
                 try:
                     json.dump(islam_qa, file, indent=4)
@@ -87,5 +87,8 @@ async def run():
                     part += 1
                 except:
                     print("Failed to write file")
+    with open(f"./islam_qa_part{part}.json", 'w') as file:
+        json.dump(islam_qa, file, indent=4)
+        print("printed part ", part)    
 
 asyncio.run(run())
