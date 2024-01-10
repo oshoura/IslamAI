@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    /* background-color:rgb(196, 220, 243); */
+    color: rgb(51, 51, 51);
+    font-family: Poppins, sans-serif;
+}
+
+
+
+.second-section {
+    background: linear-gradient(180deg, rgba(168, 203, 235, 0.2) 0%, rgba(168, 203, 235, 0.1) 30%, rgba(168, 203, 235, 0) 70%);
+}
+.blue-glow {
+    background-image: radial-gradient(circle at center, rgba(0, 123, 255, 0.5) 0%, rgba(0, 123, 255, 0) 60%);
+}
+
+
+.gradient-text {
+    background: radial-gradient(circle, rgb(83, 147, 207),rgba(168, 203, 235, 0.4));
+    /* background: linear-gradient(45deg, blue, red); */
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
